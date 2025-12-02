@@ -1,0 +1,300 @@
+:root{
+    --primary-color: #2A98E6;
+    --secondary-color: #007BD4;
+    --darkest-color: #1E1E2D;
+    --lightest-color: #FFFFFF;
+    --lightsh-color: #F3F6FF;
+    --border-neutral: #E4E4E4;
+    --alert-successs: #00C785;
+    --lighter-shadow: 0px 12px 20px 5px rgba(0,5,98,0.2);
+}
+
+/* Hide mobile-only UI by default; shown explicitly in mobile media query */
+.video-list{ display:none; }
+
+/* Base */
+body{
+    color: var(--darkest-color);
+    font-family: 'Nunito Sans', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* page shouldn't scroll; left column scrolls */
+}
+
+/* Header / hero */
+.hero{
+    height: 30vh;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    background-image: url('imagens/hero.png');
+    background-size: cover;
+    background-position: center;
+}
+.hero-inner{ width:100%; max-width:1200px; margin:0 auto; padding:0 24px; }
+.hero-title{ color:#fff; margin:0; font-size:clamp(1.25rem, 2.8vw, 2rem); line-height:1.4; max-width:100%; text-align: center;}
+
+/* Mobile tab bar (hidden by default, shown in mobile media query) */
+.mobile-tabs{ display:none; }
+
+/* Main area (overlaps hero) */
+.main-container{
+    height: calc(70vh + 2rem);
+    margin-top: -2rem; /* overlap hero */
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+/* Two-column layout */
+.two-col{
+    display:flex;
+    gap:3rem;
+    padding-left:3rem;
+    box-sizing:border-box;
+    align-items:flex-start;
+    height:100%;
+}
+
+.col-left{
+    flex:0 1 55%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    box-sizing:border-box;
+}
+
+.col-right{ flex:0 0 45%; height:100%; }
+
+.right-inner{
+    display:flex;
+    align-items:flex-start;
+    flex-wrap:nowrap;
+    height:100%;
+    flex-direction:row;
+    width:100%;
+    gap:1rem;
+}
+
+.left-inner{ display:flex; flex-direction:column; width:100%; height:100%; }
+.left-inner p { line-height: 1.27rem; }
+.left-header{ padding:28px 0 20px 0; }
+
+/* Scrollable left column */
+.left-scroll{
+    flex:1 1 auto;
+    overflow:auto;
+    -webkit-overflow-scrolling: touch;
+    padding:24px 32px;
+    border-radius:4rem 4rem 0 0;
+    box-shadow:var(--lighter-shadow);
+    background:#fff;
+    scrollbar-gutter: stable both-edges;
+    scrollbar-width: none;
+}
+.left-scroll-inner{ max-width:860px; margin:0; }
+.page-title{ color:#000; margin:0; font-size:2.2rem; line-height:1.08; }
+.emoji{ display:block; font-size:3rem; margin-bottom:8px; }
+.left-scroll p, .left-scroll h3{ color:var(--darkest-color); }
+@media screen and (min-width: 480px) {
+    
+    article .column-list{
+        display:flex;
+        gap:2rem;
+        margin:0;
+        padding:0;
+        list-style:none;
+    }
+    
+    article .column-list .column { width: 50%; }
+}
+
+hr {
+    border:0;
+    border-top:1px solid var(--border-neutral);
+    margin:24px 0;
+}
+
+article .quote {
+    background: #a1d4f8;
+    padding: 0.5rem;
+    border-radius: 5.5rem;
+    corner-shape: squircle;
+    color: var(--darkest-color);
+}
+
+.indicador { color: var(--alert-successs); font-size: 1.8rem; font-weight: 600; }
+
+/* Right column: video area + info area */
+.video-area{
+    flex:0 0 50%;
+    display:flex;
+    align-items:flex-start; /* align video to top */
+    justify-content:flex-start;
+    min-width:0; /* allow shrinking */
+    height: calc(100% - 2rem); /* reserve gap at bottom */
+}
+
+.info-area{
+    flex:0 0 50%;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end; /* align to base of video */
+    align-items:flex-start;
+    box-sizing:border-box;
+    height: calc(100% - 2rem);
+}
+
+/* Video column base */
+.video-column{
+    overflow:hidden;
+    border-radius:49px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    max-width:300px;
+    aspect-ratio:300/617;
+}
+.video-column video{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Slider */
+.slider{ display:flex; position:relative; }
+.slider-viewport{ width:100%; max-width:300px; overflow:hidden; margin:0 auto; }
+.slider-track{ display:flex; transition: transform 450ms ease; width:100%; }
+
+/* Ensure height propagates inside the right column */
+.video-area .slider-track,
+.video-area .slide{ height:100%; }
+.video-area .slide{ display:flex; align-items:flex-start; justify-content:center; }
+
+.slide{ flex:0 0 100%; display:flex; justify-content:center; align-items:center; opacity:0; transition:opacity 450ms ease; }
+.slide.active{ opacity:1 }
+
+/* Override when slider lives in the right column: size by height */
+.video-area .video-column{ max-width:none; height:100%; border-radius:52px; aspect-ratio:0.4952; border: 4px solid var(--border-neutral); box-sizing: border-box;}
+.video-area .video-column video{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Info content */
+.info-content{ width:100%; box-sizing:border-box; padding:8px 12px 32px 0; color: var(--darkest-color); text-align:left; }
+.info-title{ margin:0 0 8px 0; font-size:18px; line-height:1.4; }
+.info-desc{ margin:0; font-size:14px; line-height:1.4; color: var(--darkest-color); }
+.info-title, .info-desc{ transition: opacity 1850ms ease, transform 1850ms ease; }
+.info-hidden{ opacity:0; transform:translateY(6px); }
+
+/* Controls */
+.slider-controls{ display:flex; flex-direction:row; gap:12px; margin-bottom:8px; }
+.slider-btn{ background:rgba(0,0,0,0.65); color:#fff; border:none; width:48px; height:48px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:22px; }
+.slider-btn:focus{ outline:2px solid #fff; }
+.prev, .next{ padding:4px 7px 6px 6px; }
+
+/* Responsive tweaks */
+@media (max-width:1200px){
+    .video-grid{ justify-content:center; gap:10px; }
+}
+
+@media (max-width:420px){
+    .slider-viewport{ max-width:280px; }
+    .video-column{ max-width:280px; aspect-ratio:280/372; }
+}
+
+@media (max-width:900px){
+    .right-inner{ flex-direction:column; align-items:center; }
+    .video-area, .info-area{ flex:0 0 auto; }
+    .slider-caption{ min-height:140px; }
+}
+
+/* Mobile optimization: stack layout, reduce paddings, cap video height */
+@media (max-width:768px){
+    .hero{ height:22vh; }
+    /* remove margins for the tab + content container on mobile */
+    .main-container{ height: auto; margin: 0; }
+    .hero-inner{ padding:0 12px; }
+    .hero-title{         font-size: clamp(1.1rem, 4.5vw, 1.6rem); max-width: 100%; text-align: center; }
+
+    /* mobile tab bar: two equal tabs, full-width, no gap */
+    .mobile-tabs{ display:flex; gap:0; padding:0; justify-content:space-between; width:100%; }
+    .mobile-tab{ background:transparent; border:0; padding:12px 0; flex:1 1 50%; width:50%; border-radius:0; color:var(--darkest-color); font-weight:600; cursor:pointer; text-align:center; }
+    /* active: full background fill, no rounded corners */
+    .mobile-tab[data-active="true"], .mobile-tab[aria-selected="true"]{ background:var(--primary-color); color:#fff; border-radius:0; }
+
+    /* content spacing: the container below tabs should have padding */
+    .two-col{ flex-direction: column; gap:1.25rem; padding-left:0; padding-right:0; }
+    .col-left, .col-right{ flex: none; width:100%; }
+    .col-left .left-scroll, .col-right .right-inner{ padding:16px; }
+    .left-scroll{ padding:16px; border-radius:0; }
+    .right-inner{ width:auto; }
+    .video-area{ width:100%; flex: none; height: auto; }
+    .info-area{ display:none }
+    .slider-viewport{ max-width:100%; }
+    .video-area .video-column{ aspect-ratio: auto; max-height:55vh; width:100%; border-radius:20px; }
+    .video-area .video-column video{ width:100%; height:100%; object-fit:cover; }
+    .slider-controls{ justify-content:center; }
+    .slider-btn{ width:44px; height:44px; }
+    .info-content{ padding:12px 0 20px 0; }
+    .info-title{ font-size:16px; }
+    .info-desc{ font-size:13px; }
+}
+
+/* Mobile: show only the active panel (content or videos). JS adds class to .main-container */
+@media (max-width:768px){
+    .main-container.mobile-tab--content .col-right{ display:none; }
+    .main-container.mobile-tab--content .col-left{ display:block; height: calc(100vh - 22vh - 56px); }
+    .main-container.mobile-tab--videos .col-left{ display:none; }
+    .main-container.mobile-tab--videos .col-right{ display:block; height: calc(100vh - 22vh - 56px); }
+}
+
+@media (max-width:480px){
+    .main-container.mobile-tab--content .col-left,
+    .main-container.mobile-tab--videos .col-right{ height: calc(100vh - 18vh - 56px); }
+}
+
+/* Mobile video list (hidden on desktop). When mobile-tab--videos is active we show the list instead of slider */
+@media (max-width:768px){
+    .video-list{ display:block; list-style:none; margin:0; padding:0; }
+    .video-list .video-item{ display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.06); cursor:pointer; box-sizing:border-box; min-width:0; }
+    /* smaller thumb to prioritize text; allow text to wrap and shrink */
+    .video-list .video-item .thumb{ width:64px; height:48px; background:#000; border-radius:6px; flex:0 0 32px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px; }
+    .video-list .video-item .meta{ flex:1 1 auto; min-width:0; overflow:hidden; }
+    .video-list .video-item .meta .meta-title{ display:inline-flex; font-size:15px; margin:0 0 4px 0; line-height:1.2; white-space:normal; word-break:break-word; overflow:hidden; text-overflow:ellipsis; }
+    .video-list .video-item .meta .meta-desc{ display:inline-flex; font-size:13px; color:rgba(0,0,0,0.6); margin:0; white-space:normal; overflow:hidden; text-overflow:ellipsis; }
+    /* (removed unintended override) */
+    .main-container.mobile-tab--videos .video-area .slider{ display:none; }
+    .main-container.mobile-tab--videos .video-list{ display:block; }
+}
+
+/* Modal for mobile video playback */
+.video-modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:9999; }
+.video-modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:9999; overflow:hidden; }
+.video-modal__backdrop{ position:absolute; inset:0; background:rgba(0,0,0,0.85); }
+.video-modal__content{ position:relative; width:100vw; height:100vh; max-width:100vw; max-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:12px; box-sizing:border-box; overflow:hidden; }
+.video-modal__player{ width:100%; max-width:100%; height: calc(100vh - 140px); max-height: calc(100vh - 140px); display:flex; align-items:center; justify-content:center; }
+.video-modal__player video{ width:100%; height:100%; max-width:100%; max-height:100%; object-fit:contain; background:#000; display:block; }
+.video-modal__meta{ width:100%; padding:12px; box-sizing:border-box; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.video-modal__desc{ flex:1 1 auto; margin:0; padding-right:8px; }
+.video-modal__close{ position:absolute; top:calc(10px + env(safe-area-inset-top)); right:calc(10px + env(safe-area-inset-right)); z-index:10002; background:rgba(0,0,0,0.35); border:0; color:#fff; font-size:26px; padding:12px; border-radius:8px; line-height:1; }
+.video-modal__controls{ display:flex; gap:8px; }
+.video-modal__controls .btn{ background:rgba(255,255,255,0.08); color:#fff; border:0; padding:10px 12px; border-radius:8px; font-size:18px; }
+.video-modal[hidden]{ display:none; }
+
+/* Prevent body horizontal scroll when modal open */
+body.modal-open{ overflow:hidden; }
+
+/* respect safe area insets and avoid extra horizontal space from padding */
+.video-modal__content{ padding-left: max(env(safe-area-inset-left), 12px); padding-right: max(env(safe-area-inset-right), 12px); }
+
+@media (max-width:480px){
+    .hero{ height:18vh; }
+    .left-scroll{ padding:12px; }
+    .page-title{ font-size:1.6rem; }
+    .slider-btn{ width:40px; height:40px; font-size:20px; }
+    .video-area{ padding-top:6px; }
+    .video-area .video-column{ max-height:50vh; border-radius:16px; }
+    /* ensure slider fills video-area height on very small screens */
+    .video-area .slider-viewport,
+    .video-area .slider-track,
+    .video-area .slide{ height:100%; }
+    .video-area .video-column video{ max-height:100%; width:100%; height:100%; object-fit:cover; }
+}
