@@ -25,6 +25,7 @@ body{
     flex-direction: column;
     align-items: center;
     /* padding: 1em; */
+    background: var(--lightsh-color);
 }
 
 @media (min-width: 768px){
