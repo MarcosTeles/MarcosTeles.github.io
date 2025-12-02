@@ -151,7 +151,7 @@ hr {
 }
 
 article .quote {
-    background: #a1d4f8;
+    background: #d8efff;
     padding: 0.5rem;
     border-radius: 0.5rem;
     corner-shape: squircle;
@@ -247,7 +247,7 @@ article ol li {
 }
 
 @media (max-width:900px){
-    .right-inner{ flex-direction:column; align-items:center; }
+    .right-inner{ flex-direction:column; align-items:center; width: 100%;}
     .video-area, .info-area{ flex:0 0 auto; }
     .slider-caption{ min-height:140px; }
 }
@@ -303,12 +303,24 @@ article ol li {
     .video-list .video-item{ display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.06); cursor:pointer; box-sizing:border-box; min-width:0; }
     /* smaller thumb to prioritize text; allow text to wrap and shrink */
     .video-list .video-item .thumb{ width:64px; height:48px; background:#000; border-radius:6px; flex:0 0 32px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px; }
-    .video-list .video-item .meta{ flex:1 1 auto; min-width:0; overflow:hidden; }
+    .video-list .video-item .meta{ flex:1 1 auto; min-width:0; overflow:hidden; display: flex; flex-direction: column;}
     .video-list .video-item .meta .meta-title{ display:inline-flex; font-size:15px; margin:0 0 4px 0; line-height:1.2; white-space:normal; word-break:break-word; overflow:hidden; text-overflow:ellipsis; }
     .video-list .video-item .meta .meta-desc{ display:inline-flex; font-size:13px; color:rgba(0,0,0,0.6); margin:0; white-space:normal; overflow:hidden; text-overflow:ellipsis; }
     /* (removed unintended override) */
     .main-container.mobile-tab--videos .video-area .slider{ display:none; }
     .main-container.mobile-tab--videos .video-list{ display:block; }
+}
+
+@media (min-width: 480px) and (max-width:768px){
+    body,
+    .main-container {
+        gap: 1em;
+    }
+    .mobile-tab[data-active="true"],
+    .mobile-tab[aria-selected="true"]{
+        corner-shape: squircle;
+        border-radius: 2em;
+    }
 }
 
 /* Modal for mobile video playback */

@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			li.dataset.index = i;
 			li.innerHTML = `
 				<div class="thumb">▶</div>
-				<div class="meta"><strong class="meta-title">${title}</strong><div class="meta-desc">${desc}</div></div>
+				<div class="meta"><h3 class="meta-title">${title}</h3><div class="meta-desc">${desc}</div></div>
 			`;
 			li.addEventListener('click', () => openVideoModal(i));
 			list.appendChild(li);
