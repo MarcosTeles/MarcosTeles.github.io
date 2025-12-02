@@ -20,6 +20,15 @@ body{
     padding: 0;
     height: 100vh;
     overflow: hidden; /* page shouldn't scroll; left column scrolls */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 1em; */
+}
+
+@media (min-width: 768px){
+    body{ padding: 1em; }
 }
 
 /* Header / hero */
@@ -31,6 +40,10 @@ body{
     background-image: url('imagens/hero.png');
     background-size: cover;
     background-position: center;
+
+    width: 100%;
+    corner-shape: squircle;
+    border-radius: 32px;
 }
 .hero-inner{ width:100%; max-width:1200px; margin:0 auto; padding:0 24px; }
 .hero-title{ color:#fff; margin:0; font-size:clamp(1.25rem, 2.8vw, 2rem); line-height:1.4; max-width:100%; text-align: center;}
@@ -40,6 +53,8 @@ body{
 
 /* Main area (overlaps hero) */
 .main-container{
+    display: flex;
+    justify-content: center;
     height: calc(70vh + 2rem);
     margin-top: -2rem; /* overlap hero */
     box-sizing: border-box;
@@ -49,36 +64,46 @@ body{
 
 /* Two-column layout */
 .two-col{
-    display:flex;
-    gap:3rem;
-    padding-left:3rem;
-    box-sizing:border-box;
-    align-items:flex-start;
-    height:100%;
+    display: flex;
+    gap: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-sizing: border-box;
+    align-items: flex-start;
+    height: 100%;
+    max-width: 1600px;
 }
 
 .col-left{
-    flex:0 1 55%;
+    flex:1 1 55%;
     height:100%;
     display:flex;
     flex-direction:column;
     box-sizing:border-box;
 }
 
-.col-right{ flex:0 0 45%; height:100%; }
+.col-right{ flex:1 1 45%; height:100%; }
 
 .right-inner{
-    display:flex;
+    /* display:flex;
     align-items:flex-start;
     flex-wrap:nowrap;
     height:100%;
     flex-direction:row;
     width:100%;
-    gap:1rem;
+    gap:1rem; */
+
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+    height: auto;
 }
 
 .left-inner{ display:flex; flex-direction:column; width:100%; height:100%; }
-.left-inner p { line-height: 1.27rem; }
+.left-inner p { line-height: 1.35em; }
 .left-header{ padding:28px 0 20px 0; }
 
 /* Scrollable left column */
@@ -119,21 +144,33 @@ hr {
 article .quote {
     background: #a1d4f8;
     padding: 0.5rem;
-    border-radius: 5.5rem;
+    border-radius: 0.5rem;
     corner-shape: squircle;
     color: var(--darkest-color);
+}
+
+article ul,
+article ol {
+    padding-left: 2em;
+    /* margin: 0.8rem 0 0.8rem 1.2rem; */
+}
+
+article ul li,
+article ol li {
+    line-height: 1.5rem;
 }
 
 .indicador { color: var(--alert-successs); font-size: 1.8rem; font-weight: 600; }
 
 /* Right column: video area + info area */
 .video-area{
-    flex:0 0 50%;
-    display:flex;
-    align-items:flex-start; /* align video to top */
-    justify-content:flex-start;
-    min-width:0; /* allow shrinking */
-    height: calc(100% - 2rem); /* reserve gap at bottom */
+    flex: 1 1 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 0;
+    height: calc(100% - 2rem);
+    width: 100%;
 }
 
 .info-area{
@@ -162,7 +199,7 @@ article .quote {
 
 /* Slider */
 .slider{ display:flex; position:relative; }
-.slider-viewport{ width:100%; max-width:300px; overflow:hidden; margin:0 auto; }
+.slider-viewport{ width:100%; max-width:323px; overflow:hidden; margin:0 auto; }
 .slider-track{ display:flex; transition: transform 450ms ease; width:100%; }
 
 /* Ensure height propagates inside the right column */
@@ -210,7 +247,7 @@ article .quote {
 @media (max-width:768px){
     .hero{ height:22vh; }
     /* remove margins for the tab + content container on mobile */
-    .main-container{ height: auto; margin: 0; }
+    .main-container{ height: auto; margin: 0; display: flex; flex-direction: column;}
     .hero-inner{ padding:0 12px; }
     .hero-title{         font-size: clamp(1.1rem, 4.5vw, 1.6rem); max-width: 100%; text-align: center; }
 
@@ -286,7 +323,7 @@ body.modal-open{ overflow:hidden; }
 .video-modal__content{ padding-left: max(env(safe-area-inset-left), 12px); padding-right: max(env(safe-area-inset-right), 12px); }
 
 @media (max-width:480px){
-    .hero{ height:18vh; }
+    .hero{ height:18vh; border-radius: 0; }
     .left-scroll{ padding:12px; }
     .page-title{ font-size:1.6rem; }
     .slider-btn{ width:40px; height:40px; font-size:20px; }
