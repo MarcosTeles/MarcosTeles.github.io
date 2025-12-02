@@ -44,6 +44,11 @@ body{
     width: 100%;
     corner-shape: squircle;
     border-radius: 32px;
+
+    /* width: calc(100% - 2em);
+    margin: 1em;
+    corner-shape: squircle;
+    border-radius: 2em; */
 }
 .hero-inner{ width:100%; max-width:1200px; margin:0 auto; padding:0 24px; }
 .hero-title{ color:#fff; margin:0; font-size:clamp(1.25rem, 2.8vw, 2rem); line-height:1.4; max-width:100%; text-align: center;}
@@ -60,6 +65,10 @@ body{
     box-sizing: border-box;
     position: relative;
     z-index: 1;
+
+    max-width: 1600px;
+    display: flex;
+    justify-content: center;
 }
 
 /* Two-column layout */
